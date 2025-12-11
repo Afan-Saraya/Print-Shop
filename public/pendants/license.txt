@@ -1,0 +1,11 @@
+Model Information:
+* title:	SCP Keycard Level 0 pendant (FREE)
+* source:	https://sketchfab.com/3d-models/scp-keycard-level-0-pendant-free-2d9e8bf1f2d5400c9fb216be0d02339c
+* author:	Toustik (https://sketchfab.com/Toustik)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "SCP Keycard Level 0 pendant (FREE)" (https://sketchfab.com/3d-models/scp-keycard-level-0-pendant-free-2d9e8bf1f2d5400c9fb216be0d02339c) by Toustik (https://sketchfab.com/Toustik) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

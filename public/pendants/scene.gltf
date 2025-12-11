@@ -1,0 +1,373 @@
+{
+  "accessors": [
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 3533,
+      "max": [
+        57.76300048828125,
+        -1.1679999828338623,
+        37.52399826049805
+      ],
+      "min": [
+        -62.236000061035156,
+        -3.068000078201294,
+        -33.073001861572266
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 42396,
+      "componentType": 5126,
+      "count": 3533,
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 10752,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 84792,
+      "componentType": 5126,
+      "count": 1315,
+      "max": [
+        80.0,
+        -0.0,
+        55.0
+      ],
+      "min": [
+        48.840999603271484,
+        -7.13100004196167,
+        30.29400062561035
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 100572,
+      "componentType": 5126,
+      "count": 1315,
+      "max": [
+        0.9988919496536255,
+        0.9999135732650757,
+        0.9954319596290588
+      ],
+      "min": [
+        -0.9987937211990356,
+        -0.9999083876609802,
+        -0.9951847195625305
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 43008,
+      "componentType": 5125,
+      "count": 7182,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 116352,
+      "componentType": 5126,
+      "count": 19510,
+      "max": [
+        57.76300048828125,
+        -1.1679999828338623,
+        5.755000114440918
+      ],
+      "min": [
+        -62.236000061035156,
+        -3.068000078201294,
+        -21.30699920654297
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 350472,
+      "componentType": 5126,
+      "count": 19510,
+      "max": [
+        1.0,
+        1.0,
+        0.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        0.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 71736,
+      "componentType": 5125,
+      "count": 59073,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 584592,
+      "componentType": 5126,
+      "count": 63843,
+      "max": [
+        56.185001373291016,
+        -3.068000078201294,
+        35.112998962402344
+      ],
+      "min": [
+        -60.012001037597656,
+        -3.4679999351501465,
+        -20.299999237060547
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 1350708,
+      "componentType": 5126,
+      "count": 63843,
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 308028,
+      "componentType": 5125,
+      "count": 185631,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "Toustik (https://sketchfab.com/Toustik)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/scp-keycard-level-0-pendant-free-2d9e8bf1f2d5400c9fb216be0d02339c",
+      "title": "SCP Keycard Level 0 pendant (FREE)"
+    },
+    "generator": "Sketchfab-15.43.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 1050552,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 2116824,
+      "byteOffset": 1050552,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 3167376,
+      "uri": "scene.bin"
+    }
+  ],
+  "extensionsUsed": [
+    "KHR_materials_clearcoat"
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "color_11711154",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.26651984652910465,
+          0.2513342282544769,
+          0.2513342282544769,
+          1.0
+        ],
+        "metallicFactor": 0.0
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "color_14541540",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.866667,
+          0.886275,
+          0.894118,
+          1.0
+        ],
+        "metallicFactor": 0.0
+      }
+    },
+    {
+      "doubleSided": true,
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 1.0,
+          "clearcoatRoughnessFactor": 0.04
+        }
+      },
+      "name": "color_16777215",
+      "pbrMetallicRoughness": {
+        "metallicFactor": 0.0
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "color_2829873",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "metallicFactor": 0.0
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Object_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0
+          },
+          "indices": 2,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Object_1",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 4,
+            "POSITION": 3
+          },
+          "indices": 5,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Object_2",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 7,
+            "POSITION": 6
+          },
+          "indices": 8,
+          "material": 2,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Object_3",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 10,
+            "POSITION": 9
+          },
+          "indices": 11,
+          "material": 3,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        0.0009090909152291715,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.0185873311299652e-19,
+        -0.0009090909152291715,
+        0.0,
+        0.0,
+        0.0009090909152291715,
+        2.0185873311299652e-19,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "name": "tinker.obj.cleaner.materialmerger.gles"
+    },
+    {
+      "mesh": 0,
+      "name": "Object_2"
+    },
+    {
+      "mesh": 1,
+      "name": "Object_3"
+    },
+    {
+      "mesh": 2,
+      "name": "Object_4"
+    },
+    {
+      "mesh": 3,
+      "name": "Object_5"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}

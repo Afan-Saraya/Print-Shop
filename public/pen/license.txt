@@ -1,0 +1,11 @@
+Model Information:
+* title:	Pen
+* source:	https://sketchfab.com/3d-models/pen-c210364d40554146b5d619d64c29c251
+* author:	richardyeungx (https://sketchfab.com/richardyeungx)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Pen" (https://sketchfab.com/3d-models/pen-c210364d40554146b5d619d64c29c251) by richardyeungx (https://sketchfab.com/richardyeungx) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
