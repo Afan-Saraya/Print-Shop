@@ -1,7 +1,7 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
 // internal
-import BackToTopCom from "@/components/common/back-to-top";
+import BackToTopCom from "../components/common/back-to-top";
 
 const Wrapper = ({ children }) => {
   return (

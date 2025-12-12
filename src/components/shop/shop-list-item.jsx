@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import Image from "next/image";
 import { Rating } from "react-simple-star-rating";
 import Link from "next/link";
-// internal
-import { Cart, CompareThree, QuickView, Wishlist } from "@/svg";
-import { handleProductModal } from "@/redux/features/productModalSlice";
-import { add_cart_product } from "@/redux/features/cartSlice";
-import { add_to_wishlist } from "@/redux/features/wishlist-slice";
-import { add_to_compare } from "@/redux/features/compareSlice";
+import { CompareThree, QuickView, Wishlist } from "@/svg";
 
 const ShopListItem = ({ product }) => {
-  const { _id, img, category, title, reviews, price, discount, tags, description } = product || {};
-  const dispatch = useDispatch()
+  const { _id, img, title, reviews, price, discount, tags, description } = product || {};
   const [ratingVal, setRatingVal] = useState(0);
+  
   useEffect(() => {
     if (reviews && reviews.length > 0) {
       const rating =
@@ -25,25 +19,17 @@ const ShopListItem = ({ product }) => {
     }
   }, [reviews]);
 
-  // handle add product
-  const handleAddProduct = (prd) => {
-    dispatch(add_cart_product(prd));
-  };
-  // handle wishlist product
-  const handleWishlistProduct = (prd) => {
-    dispatch(add_to_wishlist(prd));
-  };
-
-  // handle compare product
-  const handleCompareProduct = (prd) => {
-    dispatch(add_to_compare(prd));
-  };
-
   return (
-    <div className="tp-product-list-item d-md-flex">
-      <div className="tp-product-list-thumb p-relative fix">
+    <div className="tp-product-list-item d-md-flex" style={{ border: "1px solid #e0e0e0", marginBottom: "15px", borderRadius: "8px", overflow: "hidden" }}>
+      <div className="tp-product-list-thumb p-relative fix" style={{ width: "350px", height: "350px", overflow: "hidden", flexShrink: 0, borderRadius: "8px 0 0 8px" }}>
         <Link href={`/product-details/${_id}`}>
-          <Image src={img} alt="product img" width={350} height={310} />
+          <Image 
+            src={img} 
+            alt="product img" 
+            width={350} 
+            height={350}
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
         </Link>
 
         {/* <!-- product action --> */}
@@ -52,7 +38,7 @@ const ShopListItem = ({ product }) => {
             <button
               type="button"
               className="tp-product-action-btn-2 tp-product-quick-view-btn"
-              onClick={() => dispatch(handleProductModal(product))}
+              onClick={() => console.log('Quick view:', product)}
             >
               <QuickView />
               <span className="tp-product-tooltip tp-product-tooltip-right">
@@ -61,7 +47,7 @@ const ShopListItem = ({ product }) => {
             </button>
             <button
               type="button"
-              onClick={()=> handleWishlistProduct(product)}
+              onClick={() => console.log('Add to wishlist:', product)}
               className="tp-product-action-btn-2 tp-product-add-to-wishlist-btn"
             >
               <Wishlist />
@@ -71,7 +57,7 @@ const ShopListItem = ({ product }) => {
             </button>
             <button
               type="button"
-              onClick={()=> handleCompareProduct(product)}
+              onClick={() => console.log('Add to compare:', product)}
               className="tp-product-action-btn-2 tp-product-add-to-compare-btn"
             >
               <CompareThree />
@@ -82,7 +68,7 @@ const ShopListItem = ({ product }) => {
           </div>
         </div>
       </div>
-      <div className="tp-product-list-content">
+      <div className="tp-product-list-content" style={{ padding: "10px" }}>
         <div className="tp-product-content-2 pt-15">
           <div className="tp-product-tag-2">
             {tags?.map((t, i) => <a key={i} href="#">{t}</a>)}
@@ -109,7 +95,7 @@ const ShopListItem = ({ product }) => {
             {description.substring(0, 100)}
           </p>
           <div className="tp-product-list-add-to-cart">
-            <button onClick={() => handleAddProduct(product)} className="tp-product-list-add-to-cart-btn">
+            <button onClick={() => console.log('Add to cart:', product)} className="tp-product-list-add-to-cart-btn">
               Add To Cart
             </button>
           </div>

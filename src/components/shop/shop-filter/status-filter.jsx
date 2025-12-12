@@ -1,7 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import { handleFilterSidebarClose } from "@/redux/features/shop-filter-slice";
 
 const StatusFilter = ({setCurrPage,shop_right=false}) => {
   const router = useRouter();

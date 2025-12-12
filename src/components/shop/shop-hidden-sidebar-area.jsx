@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import Pagination from "@/ui/Pagination";
-import ProductItem from "../products/fashion/product-item";
+import React from "react";
+import ProductItem from "../products/page2/product-item";
 import ShopListItem from "./shop-list-item";
 import ShopTopLeft from "./shop-top-left";
 import ShopTopRight from "./shop-top-right";
@@ -10,16 +9,7 @@ const ShopHiddenSidebarArea = ({
   products,
   otherProps,
 }) => {
-  const { currPage, setCurrPage,selectHandleFilter } = otherProps;
-  const [filteredRows, setFilteredRows] = useState(products);
-  const [pageStart, setPageStart] = useState(0);
-  const [countOfPage, setCountOfPage] = useState(12);
-
-  const paginatedData = (items, startPage, pageCount) => {
-    setFilteredRows(items);
-    setPageStart(startPage);
-    setCountOfPage(pageCount);
-  };
+  const { selectHandleFilter } = otherProps;
 
   return (
     <>
@@ -32,14 +22,7 @@ const ShopHiddenSidebarArea = ({
                   <div className="row">
                     <div className="col-xl-6">
                       <ShopTopLeft
-                        showing={
-                          products.length === 0
-                            ? 0
-                            : filteredRows.slice(
-                                pageStart,
-                                pageStart + countOfPage
-                              ).length
-                        }
+                        showing={products.length}
                         total={all_products.length}
                       />
                     </div>
@@ -60,16 +43,14 @@ const ShopHiddenSidebarArea = ({
                         tabIndex="0"
                       >
                         <div className="row">
-                          {filteredRows
-                            .slice(pageStart, pageStart + countOfPage)
-                            .map((item) => (
-                              <div
-                                key={item._id}
-                                className="col-xl-3 col-lg-4 col-md-6 col-sm-6"
-                              >
-                                <ProductItem product={item} />
-                              </div>
-                            ))}
+                          {products.map((item) => (
+                            <div
+                              key={item._id}
+                              className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6"
+                            >
+                              <ProductItem product={item} />
+                            </div>
+                          ))}
                         </div>
                       </div>
                       <div
@@ -82,28 +63,13 @@ const ShopHiddenSidebarArea = ({
                         <div className="tp-shop-list-wrapper tp-shop-item-primary mb-70">
                           <div className="row">
                             <div className="col-xl-12">
-                              {filteredRows
-                                .slice(pageStart, pageStart + countOfPage)
-                                .map((item) => (
-                                  <ShopListItem key={item._id} product={item} />
-                                ))}
+                              {products.map((item) => (
+                                <ShopListItem key={item._id} product={item} />
+                              ))}
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                )}
-                {products.length > 0 && (
-                  <div className="tp-shop-pagination mt-20">
-                    <div className="tp-pagination">
-                      <Pagination
-                        items={products}
-                        countOfPage={12}
-                        paginatedData={paginatedData}
-                        currPage={currPage}
-                        setCurrPage={setCurrPage}
-                      />
                     </div>
                   </div>
                 )}

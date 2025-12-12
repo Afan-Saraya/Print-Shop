@@ -3,86 +3,142 @@
     {
       "bufferView": 2,
       "componentType": 5126,
-      "count": 35006,
+      "count": 576,
       "max": [
-        1.2844799757003784,
-        1.2844799757003784,
-        3.002389907836914
+        9.461471557617188,
+        28.21235466003418,
+        -6.556631088256836
       ],
       "min": [
-        -1.2844799757003784,
-        -2.1660099029541016,
-        -0.0044999998062849045
+        6.681535720825195,
+        25.28728485107422,
+        -9.730109214782715
       ],
       "type": "VEC3"
     },
     {
       "bufferView": 2,
-      "byteOffset": 420072,
+      "byteOffset": 6912,
       "componentType": 5126,
-      "count": 35006,
+      "count": 576,
       "max": [
-        0.9999921917915344,
-        0.9998317956924438,
-        1.0
+        0.9998337626457214,
+        0.9996626973152161,
+        0.9998338222503662
       ],
       "min": [
-        -0.9995788335800171,
-        -0.9999650120735168,
-        -1.0
+        -0.9998337626457214,
+        -0.9863144755363464,
+        -0.9998337030410767
       ],
       "type": "VEC3"
     },
     {
       "bufferView": 1,
       "componentType": 5126,
-      "count": 35006,
+      "count": 576,
       "max": [
-        0.9391499757766724,
-        0.8626999855041504
+        1.0,
+        0.9944413900375366
       ],
       "min": [
-        0.06092999875545502,
-        0.016899999231100082
+        0.0,
+        0.0
       ],
       "type": "VEC2"
     },
     {
       "bufferView": 0,
       "componentType": 5125,
-      "count": 200832,
+      "count": 2976,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 13824,
+      "componentType": 5126,
+      "count": 42,
+      "max": [
+        9.343685150146484,
+        27.647701263427734,
+        -6.674416542053223
+      ],
+      "min": [
+        6.989686489105225,
+        27.647701263427734,
+        -9.028416633605957
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 14328,
+      "componentType": 5126,
+      "count": 42,
+      "max": [
+        0.0,
+        1.0,
+        8.79837625689106e-06
+      ],
+      "min": [
+        0.0,
+        1.0,
+        -8.798352610028815e-06
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 4608,
+      "componentType": 5126,
+      "count": 42,
+      "max": [
+        0.9373546242713928,
+        0.945313036441803
+      ],
+      "min": [
+        0.048849523067474365,
+        0.05680769681930542
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 11904,
+      "componentType": 5125,
+      "count": 120,
       "type": "SCALAR"
     }
   ],
   "asset": {
     "extras": {
-      "author": "Johana-PS (https://sketchfab.com/Johana-PS)",
+      "author": "Ole Gunnar Isager (https://sketchfab.com/FrenchBaguette)",
       "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
-      "source": "https://sketchfab.com/3d-models/coffee-mug-3d-model-27334d77c37b417395aa34eccb5f7133",
-      "title": "Coffee Mug 3D Model"
+      "source": "https://sketchfab.com/3d-models/coffee-mug-school-project-5f5ccee1514c440887c072fae8e0d699",
+      "title": "Coffee Mug (School Project)"
     },
-    "generator": "Sketchfab-12.65.0",
+    "generator": "Sketchfab-12.63.0",
     "version": "2.0"
   },
   "bufferViews": [
     {
       "buffer": 0,
-      "byteLength": 803328,
+      "byteLength": 12384,
       "name": "floatBufferViews",
       "target": 34963
     },
     {
       "buffer": 0,
-      "byteLength": 280048,
-      "byteOffset": 803328,
+      "byteLength": 4944,
+      "byteOffset": 12384,
       "byteStride": 8,
       "name": "floatBufferViews",
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 840144,
-      "byteOffset": 1083376,
+      "byteLength": 14832,
+      "byteOffset": 17328,
       "byteStride": 12,
       "name": "floatBufferViews",
       "target": 34962
@@ -90,31 +146,51 @@
   ],
   "buffers": [
     {
-      "byteLength": 1923520,
+      "byteLength": 32160,
       "uri": "scene.bin"
     }
   ],
   "images": [
     {
-      "uri": "textures/Material.001_baseColor.jpeg"
+      "uri": "textures/Coffee_baseColor.png"
+    },
+    {
+      "uri": "textures/Coffee_metallicRoughness.png"
     }
   ],
   "materials": [
     {
       "doubleSided": true,
-      "name": "Material.001",
+      "name": "material",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.948052,
+          0.948052,
+          0.948052,
+          1.0
+        ],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.03830030487804878
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "Coffee",
       "pbrMetallicRoughness": {
         "baseColorTexture": {
           "index": 0
         },
-        "metallicFactor": 0.7761051829,
-        "roughnessFactor": 0.8092606707
+        "metallicFactor": 0.0,
+        "metallicRoughnessTexture": {
+          "index": 1
+        },
+        "roughnessFactor": 0.17854420731707318
       }
     }
   ],
   "meshes": [
     {
-      "name": "Circle_0",
+      "name": "Mug1_Mug_0",
       "primitives": [
         {
           "attributes": {
@@ -124,6 +200,21 @@
           },
           "indices": 3,
           "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Mug1_Coffee_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 5,
+            "POSITION": 4,
+            "TEXCOORD_0": 6
+          },
+          "indices": 7,
+          "material": 1,
           "mode": 4
         }
       ]
@@ -156,47 +247,48 @@
     },
     {
       "children": [
-        2,
-        4
+        2
       ],
-      "name": "Root"
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "f5823088d6e847dd88d1c6b10b93a01f.fbx"
     },
     {
       "children": [
         3
       ],
-      "matrix": [
-        -0.29086000000000006,
-        0.9551700000000001,
-        -0.05519000000000001,
-        0.0,
-        -0.7711,
-        -0.19988000000000003,
-        0.6045200000000001,
-        0.0,
-        0.5663900000000001,
-        0.21839000000000003,
-        0.7946700000000001,
-        0.0,
-        4.076250000000001,
-        1.00545,
-        5.903860000000001,
-        1.0
-      ],
-      "name": "Lamp"
-    },
-    {
-      "name": "Lamp"
+      "name": "RootNode"
     },
     {
       "children": [
+        4,
         5
       ],
-      "name": "Circle"
+      "name": "Mug1"
     },
     {
       "mesh": 0,
-      "name": "Circle_0"
+      "name": "Mug1_Mug_0"
+    },
+    {
+      "mesh": 1,
+      "name": "Mug1_Coffee_0"
     }
   ],
   "samplers": [
@@ -220,6 +312,10 @@
     {
       "sampler": 0,
       "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
     }
   ]
 }

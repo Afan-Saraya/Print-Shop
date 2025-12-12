@@ -1,5 +1,5 @@
-import SEO from "@/components/seo";
-import Wrapper from "@/layout/wrapper";
+import SEO from "../components/seo";
+import Wrapper from "../layout/wrapper";
 import HeaderFour from '@/layout/headers/header-4';
 import JewelryBanner from '@/components/banner/jewelry-banner';
 import JewelryShopBanner from '@/components/shop-banner/jewelry-shop-banner';

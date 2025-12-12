@@ -21,8 +21,17 @@ const Menus = () => {
   return (
     <ul>
       {menu_data.map((menu) => (
-        <li key={menu.id}>
+        <li key={menu.id} className={menu.submenu ? 'has-dropdown' : ''}>
           <Link href={menu.link}>{menu.title}</Link>
+          {menu.submenu && (
+            <ul className="tp-submenu">
+              {menu.submenu.map((submenu) => (
+                <li key={submenu.id}>
+                  <Link href={submenu.link}>{submenu.title}</Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </li>
       ))}
     </ul>

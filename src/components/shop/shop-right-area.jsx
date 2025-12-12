@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Pagination from "@/ui/Pagination";
-import ProductItem from "../products/fashion/product-item";
+import ProductItem from "../products/page2/product-item";
 import CategoryFilter from "./shop-filter/category-filter";
 import ColorFilter from "./shop-filter/color-filter";
 import PriceFilter from "./shop-filter/price-filter";

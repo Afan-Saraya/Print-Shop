@@ -32,10 +32,10 @@ export default function ModelViewer({ modelPath = '/cap/scene.gltf' }) {
     camera.position.set(0, 0, 1); // Default 2x zoom (closer to model)
     cameraRef.current = camera;
 
-    // Renderer setup
+    // Renderer setup with higher pixel ratio for better quality
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Cap at 2x for performance
     containerRef.current.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
@@ -89,31 +89,7 @@ export default function ModelViewer({ modelPath = '/cap/scene.gltf' }) {
     shadowMesh.position.y = -1.2;
     scene.add(shadowMesh);
 
-    // Backlight glow effect behind the model
-    const backlightCanvas = document.createElement('canvas');
-    backlightCanvas.width = 512;
-    backlightCanvas.height = 512;
-    const backlightCtx = backlightCanvas.getContext('2d');
-    const backlightGradient = backlightCtx.createRadialGradient(256, 256, 0, 256, 256, 256);
-    backlightGradient.addColorStop(0, 'rgba(103, 74, 217, 0.6)');
-    backlightGradient.addColorStop(0.3, 'rgba(103, 74, 217, 0.3)');
-    backlightGradient.addColorStop(0.6, 'rgba(103, 74, 217, 0.1)');
-    backlightGradient.addColorStop(1, 'rgba(103, 74, 217, 0)');
-    backlightCtx.fillStyle = backlightGradient;
-    backlightCtx.fillRect(0, 0, 512, 512);
-    
-    const backlightTexture = new THREE.CanvasTexture(backlightCanvas);
-    const backlightGeometry = new THREE.PlaneGeometry(4, 4);
-    const backlightMaterial = new THREE.MeshBasicMaterial({
-      map: backlightTexture,
-      transparent: true,
-      depthWrite: false,
-      side: THREE.DoubleSide
-    });
-    const backlightMesh = new THREE.Mesh(backlightGeometry, backlightMaterial);
-    backlightMesh.position.z = -1;
-    backlightMesh.position.y = 0;
-    scene.add(backlightMesh);
+
 
     // Controls
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -157,11 +133,14 @@ export default function ModelViewer({ modelPath = '/cap/scene.gltf' }) {
     // Store stage reference for layer tracking
     stageRef.current = document.getElementById('design-stage');
 
-    // Create master canvas for all decals
+    // Create master canvas for all decals with ultra high resolution
     const masterCanvas = document.createElement('canvas');
-    masterCanvas.width = 1024;
-    masterCanvas.height = 1024;
-    const masterCtx = masterCanvas.getContext('2d');
+    masterCanvas.width = 4096;
+    masterCanvas.height = 4096;
+    const masterCtx = masterCanvas.getContext('2d', { willReadFrequently: true });
+    // Enable high quality rendering
+    masterCtx.imageSmoothingEnabled = true;
+    masterCtx.imageSmoothingQuality = 'high';
     
     const redrawAllDecals = () => {
       // Clear master canvas with current model color
@@ -183,7 +162,9 @@ export default function ModelViewer({ modelPath = '/cap/scene.gltf' }) {
         masterCtx.rotate((decal.rotation || 0) * Math.PI / 180);
         
         if (decal.img) {
-          // Draw image
+          // Draw image with high quality
+          masterCtx.imageSmoothingEnabled = true;
+          masterCtx.imageSmoothingQuality = 'high';
           masterCtx.drawImage(decal.img, -size / 2, -size / 2, size, size);
         } else if (decal.text) {
           // Draw text
@@ -198,10 +179,13 @@ export default function ModelViewer({ modelPath = '/cap/scene.gltf' }) {
         masterCtx.restore();
       });
       
-      // Update texture
+      // Update texture with ultra high quality settings
       const canvasTexture = new THREE.CanvasTexture(masterCanvas);
       canvasTexture.flipY = true;
       canvasTexture.colorSpace = THREE.SRGBColorSpace;
+      canvasTexture.magFilter = THREE.LinearFilter;
+      canvasTexture.minFilter = THREE.LinearMipmapLinearFilter;
+      canvasTexture.anisotropy = renderer.capabilities.maxAnisotropy;
       
       modelRef.current.traverse((child) => {
         if (child.isMesh) {
@@ -220,15 +204,30 @@ export default function ModelViewer({ modelPath = '/cap/scene.gltf' }) {
       });
     };
 
-    // Global function to add decal (image) to model
+    // Global function to add decal (image) to model with upscaling
     window.addDecalToModel = (imageUrl, scale = 0.3, posX = 0, posY = 0.2, posZ = 0, layerId = null) => {
       if (!modelRef.current) return;
       
       const img = new Image();
       img.onload = () => {
-        const decalData = { imageUrl, scale, posX, posY, posZ, layerId, img, type: 'image' };
-        decalsRef.current.push(decalData);
-        redrawAllDecals();
+        // Upscale image to higher resolution for better quality
+        const canvas = document.createElement('canvas');
+        const scaleFactor = 4; // Upscale 4x
+        canvas.width = img.width * scaleFactor;
+        canvas.height = img.height * scaleFactor;
+        const ctx = canvas.getContext('2d');
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        
+        // Convert canvas to image
+        const upscaledImg = new Image();
+        upscaledImg.onload = () => {
+          const decalData = { imageUrl, scale, posX, posY, posZ, layerId, img: upscaledImg, type: 'image' };
+          decalsRef.current.push(decalData);
+          redrawAllDecals();
+        };
+        upscaledImg.src = canvas.toDataURL();
       };
       img.src = imageUrl;
     };
