@@ -10,6 +10,53 @@ export default function Editor() {
   const router = useRouter();
   const [modelPath, setModelPath] = useState('/cap/scene.gltf');
   const [editorReady, setEditorReady] = useState(false);
+  const [selectedSide, setSelectedSide] = useState('front'); // front, back, sleeves
+  
+  // Define boundaries for each side (in grid coordinates where each grid = 20px)
+  const sideBoundaries = {
+    front: { minX: 3.5, maxX: 9.5, minY: 6, maxY: 14 }, 
+    back: { minX: 13, maxX: 18.5, minY: 6, maxY: 14 }, 
+    sleeves: { minX: 14, maxX: 20, minY: 0, maxY: 4.5 } 
+  };
+  
+  // Cap boundaries
+  const capBoundaries = {
+    front: { minX: 0, maxX: 9, minY: 6, maxY: 9 }
+  };
+  
+  // Cup boundaries
+  const cupBoundaries = {
+    front: { minX: 0, maxX: 19, minY: 0, maxY: 22 }
+  };
+  
+  const currentBoundary = modelPath.includes('/cap/') ? capBoundaries[selectedSide] : modelPath.includes('/cup/') ? cupBoundaries[selectedSide] : sideBoundaries[selectedSide];
+  
+  // Update global boundary when selectedSide changes
+  useEffect(() => {
+    if(modelPath.includes('/cap/')){
+      window.currentBoundary = capBoundaries[selectedSide];
+    } else if(modelPath.includes('/cup/')){
+      window.currentBoundary = cupBoundaries[selectedSide];
+    } else {
+      window.currentBoundary = sideBoundaries[selectedSide];
+    }
+  }, [selectedSide, modelPath]);
+  
+  // Function to get zoom level based on model path
+  const getZoomForModel = (path) => {
+    if (path.includes('/shirt/')) return 2.5;
+    if (path.includes('/cap/')) return 1.5;
+    if (path.includes('/cup/')) return 0.15;
+    if (path.includes('/pen/')) return 0.1;
+    if (path.includes('/bag/')) return 1.25;
+    if (path.includes('/pendants/')) return 4;
+    if (path.includes('/badge/')) return 0.3;
+    if (path.includes('/lighter/')) return 0.008;
+    if (path.includes('/agenda/')) return 0.01024;
+    return 1; // default
+  };
+  
+  const modelZoom = getZoomForModel(modelPath);
   
   // Čekaj da router bude spreman prije čitanja query parametra
   useEffect(() => {
@@ -119,12 +166,50 @@ export default function Editor() {
                       <span className="tab-title">Graphics</span>
                       <button className="tab-close-btn" data-close-tab="tab-designs">Done</button>
                     </div>
+                    {modelPath.includes('/shirt/') && (
+                      <div style={{ marginBottom: '10px' }}>
+                        <label style={{ color: '#fff', display: 'block', marginBottom: '5px', fontSize: '12px' }}>Odaberi stranu:</label>
+                        <select value={selectedSide} onChange={(e) => setSelectedSide(e.target.value)} style={{ width: '100%', padding: '6px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.15)', color: '#fff', fontSize: '13px' }}>
+                          <option value="front">Prednja strana</option>
+                          <option value="back">Zadnja strana</option>
+                          <option value="sleeves">Rukavi</option>
+                        </select>
+                      </div>
+                    )}
+                    {modelPath.includes('/cap/') && (
+                      <div style={{ marginBottom: '10px' }}>
+                        <label style={{ color: '#fff', display: 'block', marginBottom: '5px', fontSize: '12px' }}>Odaberi stranu:</label>
+                        <select value={selectedSide} onChange={(e) => setSelectedSide(e.target.value)} style={{ width: '100%', padding: '6px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.15)', color: '#fff', fontSize: '13px' }}>
+                          <option value="front">Prednja strana</option>
+                        </select>
+                      </div>
+                    )}
+                    {modelPath.includes('/cup/') && (
+                      <div style={{ marginBottom: '10px' }}>
+                        <label style={{ color: '#fff', display: 'block', marginBottom: '5px', fontSize: '12px' }}>Odaberi stranu:</label>
+                        <select value={selectedSide} onChange={(e) => setSelectedSide(e.target.value)} style={{ width: '100%', padding: '6px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.15)', color: '#fff', fontSize: '13px' }}>
+                          <option value="front">Prednja strana</option>
+                        </select>
+                      </div>
+                    )}
                     <div>
                       <button id="btn-browse" className="rr-btn btn-add-photo"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="#fff" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg><span>Add Photo</span></button>
                     </div>
 
                     <input id="design-upload" type="file" accept="image/*" className="form-control" style={{ display: 'none' }} />
                     <div id="design-canvas" className="design-canvas-inline" style={{ width: '100%', height: '300px', position: 'relative', background: 'linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px), rgba(255,255,255,0.1)', backgroundSize: '20px 20px', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '8px', overflow: 'hidden', marginBottom: '10px' }}>
+                      <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 1 }}>
+                        {/* Top numbers - one for each grid line (20px) */}
+                        {[...Array(20)].map((_, i) => (
+                          <text key={`num-${i}`} x={i * 20} y="14" textAnchor="middle" fill="rgba(255,255,255,0.7)" fontSize="10" fontWeight="bold">{i}</text>
+                        ))}
+                        {/* Left letters - one for each grid line (20px) */}
+                        {['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'].map((letter, i) => (
+                          <text key={`letter-${i}`} x="8" y={i * 20 + 14} fill="rgba(255,255,255,0.7)" fontSize="10" fontWeight="bold">{letter}</text>
+                        ))}
+                        {/* Boundary rectangle */}
+                        <rect x={currentBoundary.minX * 20} y={currentBoundary.minY * 20} width={(currentBoundary.maxX - currentBoundary.minX) * 20} height={(currentBoundary.maxY - currentBoundary.minY) * 20 + 20} fill="none" stroke="rgba(0,255,0,0.5)" strokeWidth="2" strokeDasharray="5,5" />
+                      </svg>
                     </div>
                     <div className="design-controls">
                       <div className="control-row">
@@ -155,11 +240,49 @@ export default function Editor() {
                       <span className="tab-title">Text</span>
                       <button className="tab-close-btn" data-close-tab="tab-text-layers">Done</button>
                     </div>
+                    {modelPath.includes('/shirt/') && (
+                      <div style={{ marginBottom: '10px' }}>
+                        <label style={{ color: '#fff', display: 'block', marginBottom: '5px', fontSize: '12px' }}>Odaberi stranu:</label>
+                        <select value={selectedSide} onChange={(e) => setSelectedSide(e.target.value)} style={{ width: '100%', padding: '6px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.15)', color: '#fff', fontSize: '13px' }}>
+                          <option value="front">Prednja strana</option>
+                          <option value="back">Zadnja strana</option>
+                          <option value="sleeves">Rukavi</option>
+                        </select>
+                      </div>
+                    )}
+                    {modelPath.includes('/cap/') && (
+                      <div style={{ marginBottom: '10px' }}>
+                        <label style={{ color: '#fff', display: 'block', marginBottom: '5px', fontSize: '12px' }}>Odaberi stranu:</label>
+                        <select value={selectedSide} onChange={(e) => setSelectedSide(e.target.value)} style={{ width: '100%', padding: '6px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.15)', color: '#fff', fontSize: '13px' }}>
+                          <option value="front">Prednja strana</option>
+                        </select>
+                      </div>
+                    )}
+                    {modelPath.includes('/cup/') && (
+                      <div style={{ marginBottom: '10px' }}>
+                        <label style={{ color: '#fff', display: 'block', marginBottom: '5px', fontSize: '12px' }}>Odaberi stranu:</label>
+                        <select value={selectedSide} onChange={(e) => setSelectedSide(e.target.value)} style={{ width: '100%', padding: '6px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.15)', color: '#fff', fontSize: '13px' }}>
+                          <option value="front">Prednja strana</option>
+                        </select>
+                      </div>
+                    )}
                     <div className="text-input-row">
                       <input id="text-input" type="text" className="form-control" placeholder="Unesite tekst" />
                       <button id="btn-add-text" className="rr-btn btn-add-text-inline"><svg width="14" height="14" viewBox="0 0 24 24"><path fill="#fff" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg><span>Add Text</span></button>
                     </div>
                     <div id="text-canvas" className="design-canvas-inline" style={{ width: '100%', height: '300px', position: 'relative', background: 'linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px), rgba(255,255,255,0.1)', backgroundSize: '20px 20px', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '8px', overflow: 'hidden', marginBottom: '10px' }}>
+                      <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 1 }}>
+                        {/* Top numbers - one for each grid line (20px) */}
+                        {[...Array(20)].map((_, i) => (
+                          <text key={`num-${i}`} x={i * 20} y="14" textAnchor="middle" fill="rgba(255,255,255,0.7)" fontSize="10" fontWeight="bold">{i}</text>
+                        ))}
+                        {/* Left letters - one for each grid line (20px) */}
+                        {['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'].map((letter, i) => (
+                          <text key={`letter-${i}`} x="8" y={i * 20 + 14} fill="rgba(255,255,255,0.7)" fontSize="10" fontWeight="bold">{letter}</text>
+                        ))}
+                        {/* Boundary rectangle */}
+                        <rect x={currentBoundary.minX * 20} y={currentBoundary.minY * 20} width={(currentBoundary.maxX - currentBoundary.minX) * 20} height={(currentBoundary.maxY - currentBoundary.minY) * 20 + 20} fill="none" stroke="rgba(0,255,0,0.5)" strokeWidth="2" strokeDasharray="5,5" />
+                      </svg>
                     </div>
                     <div className="text-controls-box">
                       <div className="text-controls-row">
@@ -207,7 +330,7 @@ export default function Editor() {
           <div className="col-xl-8 col-lg-7" style={{ padding: 0 }}>
             <div id="stage-container" style={{ display: 'flex', flexDirection: 'row', height: '100vh', gap: '10px', width: '100%' }}>
               <div id="design-stage" className="design-stage" style={{ flex: '1 1 auto', minWidth: '0' }}>
-                <ModelViewer modelPath={modelPath} />
+                <ModelViewer modelPath={modelPath} showShadow={false} zoom={modelZoom} verticalOffset={modelPath.includes('/badge/') ? 0.9 : modelPath.includes('/agenda/') ? 0.5 : 0} rotationX={modelPath.includes('/agenda/') ? Math.PI / 2 : 0} />
                 <div id="tab-overlay" className="tab-overlay">
                   <div className="tab-overlay-body"></div>
                 </div>
@@ -452,9 +575,24 @@ export default function Editor() {
               var $layer = window.$(layer); 
               var canvas = document.getElementById(cid); 
               $layer.draggable({ 
-                containment: canvas || 'parent', 
+                containment: 'parent',
                 start:function(){ select(layer); undoStack.push(snapshot(layer)); redoStack = []; }, 
                 drag:function(){ 
+                  var boundary = window.currentBoundary;
+                  if(boundary){
+                    var left = parseFloat(layer.style.left);
+                    var top = parseFloat(layer.style.top);
+                    var width = parseFloat(layer.style.width);
+                    var height = parseFloat(layer.style.height);
+                    var minX = boundary.minX * 20;
+                    var maxX = boundary.maxX * 20;
+                    var minY = boundary.minY * 20;
+                    var maxY = boundary.maxY * 20;
+                    if(left < minX) layer.style.left = minX + 'px';
+                    if(top < minY) layer.style.top = minY + 'px';
+                    if(left + width > maxX) layer.style.left = (maxX - width) + 'px';
+                    if(top + height > maxY) layer.style.top = (maxY - height) + 'px';
+                  }
                   canvas = document.getElementById(cid); 
                   if(layer.layerId && window.updateDecalPosition){ 
                     var canvasRect = canvas ? canvas.getBoundingClientRect() : overlay.getBoundingClientRect(); 
@@ -590,8 +728,8 @@ export default function Editor() {
               }
             }, {passive:false});
           }
-          function createImageLayer(src, fileName){ var layer = document.createElement('div'); layer.className = 'design-layer'; var layerId = 'layer-' + Date.now() + '-' + Math.random(); layer.id = layerId; layer.layerId = layerId; var img = document.createElement('img'); img.src = src; var rotate = document.createElement('div'); rotate.className = 'rotate-handle'; layer.appendChild(img); layer.appendChild(rotate); var canvas = document.getElementById('design-canvas'); if(canvas){ canvas.appendChild(layer); } else { overlay.appendChild(layer); } overlay.classList.add('has-layer'); var containerRect = canvas ? canvas.getBoundingClientRect() : overlay.getBoundingClientRect(); var initW = Math.min(containerRect.width*0.3, 300); var initH = initW; layer.style.width = initW+'px'; layer.style.height = initH+'px'; layer.style.left = (containerRect.width/2 - initW/2) + 'px'; layer.style.top = (containerRect.height/2 - initH/2) + 'px'; makeInteractive(layer, 'design-canvas'); var displayName = fileName || 'Slika'; layers.push({ el: layer, type: 'image', src: src, name: displayName, locked: false, layerId: layerId, canvasId: 'design-canvas' }); rebuildLayers(); select(layer); if(window.addDecalToModel){ var scale = initW / containerRect.width; var posX = (parseFloat(layer.style.left) + initW/2 - containerRect.width/2) / containerRect.width; var posY = (parseFloat(layer.style.top) + initH/2 - containerRect.height/2) / containerRect.height; window.addDecalToModel(src, scale, posX, posY, 0, layerId); } }
-          function createTextLayer(text){ var layer = document.createElement('div'); layer.className = 'design-layer'; var layerId = 'layer-' + Date.now() + '-' + Math.random(); layer.id = layerId; layer.layerId = layerId; var span = document.createElement('span'); span.textContent = text || 'Text'; span.style.fontFamily = textStyle.fontFamily; span.style.fontWeight = textStyle.fontWeight; span.style.fontSize = textStyle.fontSize+'px'; span.style.color = textStyle.color; span.style.display = 'inline-block'; span.style.width = '100%'; span.style.textAlign = 'center'; var rotate = document.createElement('div'); rotate.className = 'rotate-handle'; layer.appendChild(span); layer.appendChild(rotate); var textCanvas = document.getElementById('text-canvas'); if(textCanvas){ textCanvas.appendChild(layer); } else { overlay.appendChild(layer); } overlay.classList.add('has-layer'); var containerRect = textCanvas ? textCanvas.getBoundingClientRect() : overlay.getBoundingClientRect(); var initW = Math.min(containerRect.width*0.3, 300); var initH = 50; layer.style.width = initW+'px'; layer.style.height = initH+'px'; layer.style.left = (containerRect.width/2 - initW/2) + 'px'; layer.style.top = (containerRect.height/2 - initH/2) + 'px'; makeInteractive(layer, 'text-canvas'); layer.addEventListener('dblclick', function(){ var t = prompt('Unesite tekst', span.textContent || ''); if(t!==null){ span.textContent = t; var idx = layers.findIndex(function(x){ return x.el===layer; }); if(idx>-1){ layers[idx].text = t; layers[idx].name = t || 'Text'; if(window.updateTextDecalProperties){ window.updateTextDecalProperties(layerId, t, textStyle.color, textStyle.fontFamily, parseInt(textStyle.fontWeight)); } } } }); layers.push({ el: layer, type: 'text', text: text || 'Text', name: text || 'Text', locked: false, layerId: layerId, canvasId: 'text-canvas' }); rebuildLayers(); select(layer); if(window.addTextDecalToModel){ var scale = initW / containerRect.width; var posX = (parseFloat(layer.style.left) + initW/2 - containerRect.width/2) / containerRect.width; var posY = (parseFloat(layer.style.top) + initH/2 - containerRect.height/2) / containerRect.height; window.addTextDecalToModel(text || 'Text', scale, posX, posY, 0, layerId, textStyle.color, textStyle.fontFamily, parseInt(textStyle.fontWeight)); } }
+          function createImageLayer(src, fileName){ var layer = document.createElement('div'); layer.className = 'design-layer'; var layerId = 'layer-' + Date.now() + '-' + Math.random(); layer.id = layerId; layer.layerId = layerId; var img = document.createElement('img'); img.src = src; var rotate = document.createElement('div'); rotate.className = 'rotate-handle'; layer.appendChild(img); layer.appendChild(rotate); var canvas = document.getElementById('design-canvas'); if(canvas){ canvas.appendChild(layer); } else { overlay.appendChild(layer); } overlay.classList.add('has-layer'); var containerRect = canvas ? canvas.getBoundingClientRect() : overlay.getBoundingClientRect(); var initW = Math.min(containerRect.width*0.3, 300); var initH = initW; layer.style.width = initW+'px'; layer.style.height = initH+'px'; var boundary = window.currentBoundary; if(boundary){ var boundaryWidth = (boundary.maxX - boundary.minX) * 20; var boundaryHeight = (boundary.maxY - boundary.minY) * 20; var boundaryLeft = boundary.minX * 20; var boundaryTop = boundary.minY * 20; layer.style.left = (boundaryLeft + boundaryWidth/2 - initW/2) + 'px'; layer.style.top = (boundaryTop + boundaryHeight/2 - initH/2) + 'px'; } else { layer.style.left = (containerRect.width/2 - initW/2) + 'px'; layer.style.top = (containerRect.height/2 - initH/2) + 'px'; } makeInteractive(layer, 'design-canvas'); var displayName = fileName || 'Slika'; layers.push({ el: layer, type: 'image', src: src, name: displayName, locked: false, layerId: layerId, canvasId: 'design-canvas' }); rebuildLayers(); select(layer); if(window.addDecalToModel){ var scale = initW / containerRect.width; var posX = (parseFloat(layer.style.left) + initW/2 - containerRect.width/2) / containerRect.width; var posY = (parseFloat(layer.style.top) + initH/2 - containerRect.height/2) / containerRect.height; window.addDecalToModel(src, scale, posX, posY, 0, layerId); } }
+          function createTextLayer(text){ var layer = document.createElement('div'); layer.className = 'design-layer'; var layerId = 'layer-' + Date.now() + '-' + Math.random(); layer.id = layerId; layer.layerId = layerId; var span = document.createElement('span'); span.textContent = text || 'Text'; span.style.fontFamily = textStyle.fontFamily; span.style.fontWeight = textStyle.fontWeight; span.style.fontSize = textStyle.fontSize+'px'; span.style.color = textStyle.color; span.style.display = 'inline-block'; span.style.width = '100%'; span.style.textAlign = 'center'; var rotate = document.createElement('div'); rotate.className = 'rotate-handle'; layer.appendChild(span); layer.appendChild(rotate); var textCanvas = document.getElementById('text-canvas'); if(textCanvas){ textCanvas.appendChild(layer); } else { overlay.appendChild(layer); } overlay.classList.add('has-layer'); var containerRect = textCanvas ? textCanvas.getBoundingClientRect() : overlay.getBoundingClientRect(); var initW = Math.min(containerRect.width*0.3, 300); var initH = 50; layer.style.width = initW+'px'; layer.style.height = initH+'px'; var boundary = window.currentBoundary; if(boundary){ var boundaryWidth = (boundary.maxX - boundary.minX) * 20; var boundaryHeight = (boundary.maxY - boundary.minY) * 20; var boundaryLeft = boundary.minX * 20; var boundaryTop = boundary.minY * 20; layer.style.left = (boundaryLeft + boundaryWidth/2 - initW/2) + 'px'; layer.style.top = (boundaryTop + boundaryHeight/2 - initH/2) + 'px'; } else { layer.style.left = (containerRect.width/2 - initW/2) + 'px'; layer.style.top = (containerRect.height/2 - initH/2) + 'px'; } makeInteractive(layer, 'text-canvas'); layer.addEventListener('dblclick', function(){ var t = prompt('Unesite tekst', span.textContent || ''); if(t!==null){ span.textContent = t; var idx = layers.findIndex(function(x){ return x.el===layer; }); if(idx>-1){ layers[idx].text = t; layers[idx].name = t || 'Text'; if(window.updateTextDecalProperties){ window.updateTextDecalProperties(layerId, t, textStyle.color, textStyle.fontFamily, parseInt(textStyle.fontWeight)); } } } }); layers.push({ el: layer, type: 'text', text: text || 'Text', name: text || 'Text', locked: false, layerId: layerId, canvasId: 'text-canvas' }); rebuildLayers(); select(layer); if(window.addTextDecalToModel){ var scale = initW / containerRect.width; var posX = (parseFloat(layer.style.left) + initW/2 - containerRect.width/2) / containerRect.width; var posY = (parseFloat(layer.style.top) + initH/2 - containerRect.height/2) / containerRect.height; window.addTextDecalToModel(text || 'Text', scale, posX, posY, 0, layerId, textStyle.color, textStyle.fontFamily, parseInt(textStyle.fontWeight)); } }
           function setLocked(layerEl, locked){ try{ window.$(layerEl).draggable(locked ? 'disable' : 'enable'); window.$(layerEl).resizable(locked ? 'disable' : 'enable'); }catch(e){} }
           function duplicateLayer(L){ if(!L) return; var s = snapshot(L.el); var offset = 20; var copy; if(L.type==='image'){ copy = document.createElement('div'); copy.className = 'design-layer'; var img = document.createElement('img'); img.src = L.src; var rotate = document.createElement('div'); rotate.className = 'rotate-handle'; copy.appendChild(img); copy.appendChild(rotate); overlay.appendChild(copy); } else { copy = document.createElement('div'); copy.className = 'design-layer'; var span = document.createElement('span'); span.textContent = L.text || 'Text'; span.style.fontFamily = 'Arial, sans-serif'; span.style.fontWeight = '600'; span.style.fontSize = '24px'; span.style.color = '#111'; var rotate2 = document.createElement('div'); rotate2.className = 'rotate-handle'; copy.appendChild(span); copy.appendChild(rotate2); overlay.appendChild(copy); }
             copy.style.width = s.width; copy.style.height = s.height; copy.style.left = (parseFloat(s.left||'0') + offset)+'px'; copy.style.top = (parseFloat(s.top||'0') + offset)+'px'; copy.dataset.rotation = s.rotation||'0'; copy.style.transform = 'rotate('+parseFloat(s.rotation||'0')+'deg)'; makeInteractive(copy); layers.push({ el: copy, type: L.type, src: L.src, text: L.text, name: L.name + ' copy', locked: false }); rebuildLayers(); select(copy); }

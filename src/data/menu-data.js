@@ -37,7 +37,7 @@ const menu_data = [
   {
     id: 3,
     title: 'Personalizuj',
-    link: '/shop-category',
+    link: '/personalize',
   },
   {
     id: 4,
@@ -90,7 +90,7 @@ export const mobile_menu = [
   {
     id: 3,
     title: 'Personalizuj',
-    link: '/shop-category',
+    link: '/personalize',
   },
   {
     id: 4,

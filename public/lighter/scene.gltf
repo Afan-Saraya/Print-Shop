@@ -1,0 +1,478 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 22808,
+      "max": [
+        -40.0,
+        67.0,
+        11.867531776428223
+      ],
+      "min": [
+        -62.5,
+        0.0,
+        3.142042636871338
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 273696,
+      "componentType": 5126,
+      "count": 22808,
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 22808,
+      "max": [
+        1.0,
+        1.0
+      ],
+      "min": [
+        0.0,
+        0.0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 100788,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 547392,
+      "componentType": 5126,
+      "count": 3919,
+      "max": [
+        -40.54524612426758,
+        73.16593933105469,
+        11.723923683166504
+      ],
+      "min": [
+        -47.439979553222656,
+        65.84809112548828,
+        3.1979477405548096
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 594420,
+      "componentType": 5126,
+      "count": 3919,
+      "max": [
+        0.9925442337989807,
+        0.9998571276664734,
+        0.9994478225708008
+      ],
+      "min": [
+        -0.9957528114318848,
+        -0.9998477101325989,
+        -0.9994493126869202
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 182464,
+      "componentType": 5126,
+      "count": 3919,
+      "max": [
+        1.0,
+        1.0
+      ],
+      "min": [
+        0.0,
+        0.0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 403152,
+      "componentType": 5125,
+      "count": 13392,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 641448,
+      "componentType": 5126,
+      "count": 2320,
+      "max": [
+        -47.22624206542969,
+        79.58074188232422,
+        10.5
+      ],
+      "min": [
+        -55.32309341430664,
+        71.48404693603516,
+        4.5
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 669288,
+      "componentType": 5126,
+      "count": 2320,
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 213816,
+      "componentType": 5126,
+      "count": 2320,
+      "max": [
+        1.0,
+        1.0
+      ],
+      "min": [
+        0.0,
+        0.0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 456720,
+      "componentType": 5125,
+      "count": 6672,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 697128,
+      "componentType": 5126,
+      "count": 8506,
+      "max": [
+        -47.3360481262207,
+        79.11372375488281,
+        11.847978591918945
+      ],
+      "min": [
+        -62.48042678833008,
+        67.0,
+        3.161543369293213
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 799200,
+      "componentType": 5126,
+      "count": 8506,
+      "max": [
+        1.0,
+        1.0,
+        0.9999999403953552
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 232376,
+      "componentType": 5126,
+      "count": 8506,
+      "max": [
+        1.0,
+        1.0
+      ],
+      "min": [
+        0.0,
+        0.0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 483408,
+      "componentType": 5125,
+      "count": 33135,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "m.midas18 (https://sketchfab.com/m.midas18)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/cricket-lighter-cad-156f029fbaf840e99b4338135b4eb29c",
+      "title": "Cricket lighter CAD"
+    },
+    "generator": "Sketchfab-12.65.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 615948,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 300424,
+      "byteOffset": 615948,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 901272,
+      "byteOffset": 916372,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 1817644,
+      "uri": "scene.bin"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "Level_1",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.02943896117541168,
+          0.02943896117541168,
+          0.02943896117541168,
+          1.0
+        ],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.20970731210797317
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "Level_2",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.050699734109251174,
+          0.050699734109251174,
+          0.050699734109251174,
+          1.0
+        ],
+        "roughnessFactor": 0.2911267663471084
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "Level_3",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.984314,
+          0.980392,
+          0.960784,
+          1.0
+        ],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.6
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "cricket v21_Level 1_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Component1_Level 2_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 5,
+            "POSITION": 4,
+            "TEXCOORD_0": 6
+          },
+          "indices": 7,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "cricket v21_Level 3_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 9,
+            "POSITION": 8,
+            "TEXCOORD_0": 10
+          },
+          "indices": 11,
+          "material": 2,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "cricket v21_Level 2_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 13,
+            "POSITION": 12,
+            "TEXCOORD_0": 14
+          },
+          "indices": 15,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "c367bca31c6b4ba591bcd1e342b79778.fbx"
+    },
+    {
+      "children": [
+        3,
+        5,
+        7,
+        9
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        4
+      ],
+      "name": "cricket v21"
+    },
+    {
+      "mesh": 0,
+      "name": "cricket v21_Level 1_0"
+    },
+    {
+      "children": [
+        6
+      ],
+      "name": "Component1"
+    },
+    {
+      "mesh": 1,
+      "name": "Component1_Level 2_0"
+    },
+    {
+      "children": [
+        8
+      ],
+      "name": "cricket v21"
+    },
+    {
+      "mesh": 2,
+      "name": "cricket v21_Level 3_0"
+    },
+    {
+      "children": [
+        10
+      ],
+      "name": "cricket v21"
+    },
+    {
+      "mesh": 3,
+      "name": "cricket v21_Level 2_0"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}

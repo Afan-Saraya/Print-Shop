@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
-export default function ModelViewer({ modelPath = '/cap/scene.gltf' }) {
+export default function ModelViewer({ modelPath = '/cap/scene.gltf', showShadow = true, zoom = 1, autoRotate = false, modelColor = '#d1d1cf', verticalOffset = 0, rotationX = 0 }) {
   const containerRef = useRef(null);
   const sceneRef = useRef(null);
   const cameraRef = useRef(null);
@@ -29,7 +29,7 @@ export default function ModelViewer({ modelPath = '/cap/scene.gltf' }) {
       0.1,
       1000
     );
-    camera.position.set(0, 0, 1); // Default 2x zoom (closer to model)
+    camera.position.set(0, verticalOffset, 1 / zoom); // Adjust zoom based on parameter and add vertical offset
     cameraRef.current = camera;
 
     // Renderer setup with higher pixel ratio for better quality
@@ -65,29 +65,31 @@ export default function ModelViewer({ modelPath = '/cap/scene.gltf' }) {
     rimLight3.position.set(2.5, -1, 1);
     scene.add(rimLight3);
 
-    // Fake shadow under the model (ellipse with gradient)
-    const shadowCanvas = document.createElement('canvas');
-    shadowCanvas.width = 256;
-    shadowCanvas.height = 256;
-    const shadowCtx = shadowCanvas.getContext('2d');
-    const gradient = shadowCtx.createRadialGradient(128, 128, 0, 128, 128, 128);
-    gradient.addColorStop(0, 'rgba(0, 0, 0, 0.4)');
-    gradient.addColorStop(0.5, 'rgba(0, 0, 0, 0.2)');
-    gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-    shadowCtx.fillStyle = gradient;
-    shadowCtx.fillRect(0, 0, 256, 256);
-    
-    const shadowTexture = new THREE.CanvasTexture(shadowCanvas);
-    const shadowGeometry = new THREE.PlaneGeometry(3, 3);
-    const shadowMaterial = new THREE.MeshBasicMaterial({
-      map: shadowTexture,
-      transparent: true,
-      depthWrite: false
-    });
-    const shadowMesh = new THREE.Mesh(shadowGeometry, shadowMaterial);
-    shadowMesh.rotation.x = -Math.PI / 2;
-    shadowMesh.position.y = -1.2;
-    scene.add(shadowMesh);
+    // Fake shadow under the model (ellipse with gradient) - only if showShadow is true
+    if (showShadow) {
+      const shadowCanvas = document.createElement('canvas');
+      shadowCanvas.width = 256;
+      shadowCanvas.height = 256;
+      const shadowCtx = shadowCanvas.getContext('2d');
+      const gradient = shadowCtx.createRadialGradient(128, 128, 0, 128, 128, 128);
+      gradient.addColorStop(0, 'rgba(0, 0, 0, 0.4)');
+      gradient.addColorStop(0.5, 'rgba(0, 0, 0, 0.2)');
+      gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      shadowCtx.fillStyle = gradient;
+      shadowCtx.fillRect(0, 0, 256, 256);
+      
+      const shadowTexture = new THREE.CanvasTexture(shadowCanvas);
+      const shadowGeometry = new THREE.PlaneGeometry(3, 3);
+      const shadowMaterial = new THREE.MeshBasicMaterial({
+        map: shadowTexture,
+        transparent: true,
+        depthWrite: false
+      });
+      const shadowMesh = new THREE.Mesh(shadowGeometry, shadowMaterial);
+      shadowMesh.rotation.x = -Math.PI / 2;
+      shadowMesh.position.y = -1.2;
+      scene.add(shadowMesh);
+    }
 
 
 
@@ -95,8 +97,8 @@ export default function ModelViewer({ modelPath = '/cap/scene.gltf' }) {
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    controls.autoRotate = false;
-    controls.autoRotateSpeed = 0;
+    controls.autoRotate = autoRotate;
+    controls.autoRotateSpeed = autoRotate ? 2 : 0;
     controlsRef.current = controls;
 
     // Track current model color (default light gray #d1d1cf)
@@ -110,13 +112,13 @@ export default function ModelViewer({ modelPath = '/cap/scene.gltf' }) {
       scene.add(model);
       modelRef.current = model;
 
-      // Store original materials and set default color (#d1d1cf)
+      // Store original materials and set default color
       model.traverse((child) => {
         if (child.isMesh && child.material) {
           originalMaterialsRef.current.set(child, child.material.clone());
-          // Set default light gray material with rim light support
+          // Set material with provided color
           child.material = new THREE.MeshStandardMaterial({
-            color: 0xd1d1cf,
+            color: modelColor,
             side: THREE.DoubleSide,
             roughness: 0.5,
             metalness: 0.1
@@ -128,6 +130,11 @@ export default function ModelViewer({ modelPath = '/cap/scene.gltf' }) {
       const box = new THREE.Box3().setFromObject(model);
       const center = box.getCenter(new THREE.Vector3());
       model.position.sub(center);
+      
+      // Apply rotation if specified
+      if (rotationX !== 0) {
+        model.rotation.x = rotationX;
+      }
     });
 
     // Store stage reference for layer tracking

@@ -1,0 +1,8 @@
+Model Information:
+* title:	Cup
+* source:	https://sketchfab.com/3d-models/cup-234087bb4cc9433ba50cefc241bf02dd
+* author:	Jeferson Camargo Brasil (https://sketchfab.com/sidbeyond)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works

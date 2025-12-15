@@ -1,0 +1,11 @@
+Model Information:
+* title:	Agenda Moleskine
+* source:	https://sketchfab.com/3d-models/agenda-moleskine-35328820cfc640d2a9b5eedb6d7b907b
+* author:	unrealstudio (https://sketchfab.com/unrealstudio)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Agenda Moleskine" (https://sketchfab.com/3d-models/agenda-moleskine-35328820cfc640d2a9b5eedb6d7b907b) by unrealstudio (https://sketchfab.com/unrealstudio) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
