@@ -12,7 +12,7 @@ const PersonalizePage = () => {
       <SEO pageTitle="Personalizuj Svoje Proizvode" />
       <HeaderTwo style_2={true} />
       <ShopBreadcrumb title="Personalizuj Svoje Proizvode" subtitle="Odaberi Materijal i Personalizuj" />
-      <ShopCategoryArea/>
+      <ShopCategoryArea showTitle={false} />
       <Footer primary_style={true} />
     </Wrapper>
   );

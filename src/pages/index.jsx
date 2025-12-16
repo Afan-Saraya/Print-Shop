@@ -12,6 +12,7 @@ import JewelryBrands from '@/components/brand/jewelry-brands';
 import InstagramAreaFour from '@/components/instagram/instagram-area-4';
 import FeatureAreaThree from '@/components/features/feature-area-3';
 import FooterTwo from '@/layout/footers/footer-2';
+import ShopCategoryArea from '@/components/categories/shop-category-area';
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
       <FeatureAreaThree />
       <JewelryShopBanner/>
       <JewelryAbout/>
+      <ShopCategoryArea showTitle={true} showCarousel={false} />
       <FooterTwo/>
     </Wrapper>
   )

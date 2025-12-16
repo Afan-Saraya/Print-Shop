@@ -159,6 +159,18 @@ export default function Editor() {
                   <button className="tab-btn" data-tab="tab-layers"><span className="tab-icon"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 2l9 4-9 4-9-4 9-4zm0 7l9 4-9 4-9-4 9-4zm0 7l9 4-9 4-9-4 9-4z" fill="#333"/></svg></span><span className="tab-label">Layers</span></button>
                   <button className="tab-btn" data-tab="tab-text-layers"><span className="tab-icon"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M5 4v3h5v12h3V7h6V4H5z" fill="#333"/></svg></span><span className="tab-label">Text Layers</span></button>
                   <button className="tab-btn" data-tab="tab-colors"><span className="tab-icon"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" fill="#333"/></svg></span><span className="tab-label">Colors</span></button>
+                  
+                  {/* Save Button at the bottom */}
+                  <div className="save-button-container">
+                    <button id="btn-save-design" className="save-btn">
+                      <span className="save-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24">
+                          <path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z" fill="#fff"/>
+                        </svg>
+                      </span>
+                      <span className="save-label">Sačuvaj</span>
+                    </button>
+                  </div>
                 </div>
                 <div className="designer-content">
                   <div id="tab-designs" className="tab-pane">
@@ -363,7 +375,7 @@ export default function Editor() {
       .layer-card .meta{font-size:12px;color:#666}
       .layer-card .actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
       .layer-card .title,.layer-card .meta{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-      .design-stage{position:relative;background:#000;border:none;display:flex;align-items:center;justify-content:center;overflow:hidden;width:100%;flex:1;padding:0;border-radius:0}
+      .design-stage{position:relative;background:linear-gradient(135deg, #674AD9 0%, #4A3B9A 25%, #3A2C7A 50%, #2A1E5A 75%, #1A1040 100%);border:none;display:flex;align-items:center;justify-content:center;overflow:hidden;width:100%;flex:1;padding:0;border-radius:0}
       @media (max-width: 991px){ .design-stage{border-radius:30px} }
       .design-stage .shirt-base{max-width:100%;max-height:100%;width:auto;height:auto;pointer-events:none;object-fit:contain}
       .design-stage canvas{width:100% !important;height:100% !important}
@@ -393,6 +405,11 @@ export default function Editor() {
       .designer-nav .tab-btn.active{background:rgba(103,74,217,0.8);border-color:rgba(103,74,217,0.5);color:#fff}
       .designer-nav .tab-btn .tab-icon{width:18px;height:18px;display:block;margin:0 auto}
       .designer-nav .tab-btn .tab-label{display:block;line-height:1.2}
+      .save-button-container{margin-top:auto;padding-top:20px}
+      .save-btn{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;text-align:center;border:2px solid rgba(103,74,217,0.8);border-radius:8px;padding:12px;background:linear-gradient(135deg,#674AD9,#9C88FF);color:#fff;cursor:pointer;transition:all 0.3s ease;font-weight:600}
+      .save-btn:hover{background:linear-gradient(135deg,#5a3fb8,#8b7aff);border-color:rgba(103,74,217,1);transform:translateY(-2px);box-shadow:0 4px 12px rgba(103,74,217,0.4)}
+      .save-btn .save-icon{width:20px;height:20px;display:block}
+      .save-btn .save-label{display:block;line-height:1.2;font-size:12px}
       .designs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;width:100%;box-sizing:border-box}
       .designs-grid .design-thumb{border:none;border-radius:0;overflow:visible;cursor:pointer;background:transparent;padding:0;width:100%}
       .designs-grid .design-thumb img{width:100%;max-width:100%;height:auto;display:block;object-fit:contain}
@@ -409,7 +426,7 @@ export default function Editor() {
       
       .designer-area.fs .designer-content{display:none !important}
       .design-sidebar{position:sticky;top:20px;display:flex;flex-direction:column;height:100%}
-      .designer-nav{width:160px;border-right:none}
+      .designer-nav{width:160px;border-right:none;display:flex;flex-direction:column;height:100%}
       .design-sidebar{width:160px;max-width:160px;flex:0 0 160px}
       @media (min-width: 992px){
         .designer-area.fs .col-xl-4.col-lg-5{flex:0 0 160px;max-width:160px;display:flex;flex-direction:column}
@@ -880,6 +897,65 @@ export default function Editor() {
             if(btnZoomIn){ btnZoomIn.addEventListener('click', function(){ zoom = Math.min(2, zoom + 0.25); applyZoom(); }); }
             var btnZoomOut = document.getElementById('btn-zoom-out'); 
             if(btnZoomOut){ btnZoomOut.addEventListener('click', function(){ zoom = Math.max(0.5, zoom - 0.25); applyZoom(); }); }
+            // Save functionality
+            var btnSave = document.getElementById('btn-save-design');
+            if(btnSave){ 
+              btnSave.addEventListener('click', function(){ 
+                // Create a canvas to capture the current design
+                var rect = overlay.getBoundingClientRect();
+                var canvas = document.createElement('canvas');
+                canvas.width = Math.floor(rect.width * 2); // Higher resolution
+                canvas.height = Math.floor(rect.height * 2);
+                var ctx = canvas.getContext('2d');
+                ctx.scale(2, 2); // Scale for better quality
+                
+                // Fill with model color background
+                ctx.fillStyle = '#ffffff'; // White background
+                ctx.fillRect(0, 0, rect.width, rect.height);
+                
+                // Draw all layers
+                layers.forEach(function(L){
+                  var el = L.el;
+                  var left = parseFloat(el.style.left||'0');
+                  var top = parseFloat(el.style.top||'0');
+                  var w = el.offsetWidth;
+                  var h = el.offsetHeight;
+                  var rot = parseFloat(el.dataset.rotation||'0') * Math.PI/180;
+                  
+                  ctx.save();
+                  ctx.translate(left + w/2, top + h/2);
+                  ctx.rotate(rot);
+                  
+                  if(L.type === 'image' && L.el.querySelector('img')){
+                    var img = L.el.querySelector('img');
+                    ctx.drawImage(img, -w/2, -h/2, w, h);
+                  } else if(L.type === 'text' && L.el.querySelector('span')){
+                    var span = L.el.querySelector('span');
+                    var style = window.getComputedStyle(span);
+                    ctx.font = style.fontWeight + ' ' + style.fontSize + ' ' + style.fontFamily;
+                    ctx.fillStyle = style.color;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(span.textContent, 0, 0);
+                  }
+                  
+                  ctx.restore();
+                });
+                
+                // Download the image
+                var dataURL = canvas.toDataURL('image/png');
+                var link = document.createElement('a');
+                link.download = 'moj-dizajn-' + Date.now() + '.png';
+                link.href = dataURL;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Show success message
+                alert('Dizajn je uspješno sačuvan!');
+              }); 
+            }
+            
             var btnPrint = document.getElementById('btn-print'); if(btnPrint){ btnPrint.addEventListener('click', function(){ var baseImg = stage.querySelector('.shirt-base'); var rect = overlay.getBoundingClientRect(); var canvas = document.createElement('canvas'); canvas.width = Math.floor(rect.width); canvas.height = Math.floor(rect.height); var ctx = canvas.getContext('2d'); var done = function(){ var data = canvas.toDataURL('image/png'); var w = window.open(''); if(w){ w.document.write('<img src="'+data+'" style="max-width:100%">'); w.document.close(); w.focus(); w.print(); } }; if(baseImg){ var img = new Image(); img.onload = function(){ ctx.drawImage(img, 0, 0, canvas.width, canvas.height); draw(); }; img.src = baseImg.src; } else { draw(); } function draw(){ layers.forEach(function(L){ var el = L.el; var left = parseFloat(el.style.left||'0'); var top = parseFloat(el.style.top||'0'); var w = el.offsetWidth; var h = el.offsetHeight; var rot = parseFloat(el.dataset.rotation||'0') * Math.PI/180; ctx.save(); ctx.translate(left + w/2, top + h/2); ctx.rotate(rot); if(L.type==='image'){ var im = el.querySelector('img'); if(im){ var iw = im.naturalWidth || w; var ih = im.naturalHeight || h; var scale = Math.min(w/iw, h/ih); var dw = iw * scale; var dh = ih * scale; ctx.drawImage(im, -dw/2, -dh/2, dw, dh); } } else if(L.type==='text'){ var span = el.querySelector('span'); var txt = span ? span.textContent : (L.text||''); var fs = 24; ctx.fillStyle = '#111'; ctx.font = '600 '+fs+'px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(txt, 0, 0); } ctx.restore(); }); done(); }
             }); }
 

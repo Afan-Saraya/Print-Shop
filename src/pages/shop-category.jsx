@@ -12,7 +12,7 @@ const CategoryPage = () => {
       <SEO pageTitle="Kategorije Proizvoda" />
       <HeaderTwo style_2={true} />
       <ShopBreadcrumb title="Kategorije Proizvoda" subtitle="Odaberi Materijal i Personalizuj" />
-      <ShopCategoryArea/>
+      <ShopCategoryArea showTitle={true} />
       <Footer primary_style={true} />
     </Wrapper>
   );

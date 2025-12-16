@@ -123,10 +123,6 @@ const DetailsWrapper = ({ productItem, handleImageActive, activeImg, detailsBott
       </div>
       {/* product-details-action-sm start */}
       <div className="tp-product-details-action-sm">
-        <button disabled={status === 'out-of-stock'} onClick={() => handleCompareProduct(productItem)} type="button" className="tp-product-details-action-sm-btn">
-          <CompareTwo />
-          Poredi
-        </button>
         <button disabled={status === 'out-of-stock'} onClick={() => handleWishlistProduct(productItem)} type="button" className="tp-product-details-action-sm-btn">
           <WishlistTwo />
           Dodaj na listu želja

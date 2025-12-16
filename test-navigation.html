@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Navigacije</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .nav-link {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background: #674AD9;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .nav-link:hover {
+            background: #5a3fb8;
+        }
+        .issue {
+            background: #ffe6e6;
+            border: 1px solid #ffcccc;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .solution {
+            background: #e6ffe6;
+            border: 1px solid #ccffcc;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Test Navigacije - Saraya Print Shop</h1>
+        
+        <div class="issue">
+            <h2>🚨 Problem</h2>
+            <p>Kada pokušavate da pređete sa home stranice na personalize stranicu, URL se menja ali stranica se ne učitava.</p>
+        </div>
+
+        <div class="solution">
+            <h2>✅ Rešenje</h2>
+            <p>Identifikovao sam i popravio sledeće probleme:</p>
+            <ul>
+                <li><strong>window.location.href</strong> - Zamenio sa Next.js router.push() za pravilno client-side rutiranje</li>
+                <li><strong>GlobalLoader</strong> - Modifikovao da ne blokira navigaciju između stranica</li>
+                <li><strong>Editor refresh</strong> - Zamenio window.location.href sa router.replace()</li>
+            </ul>
+        </div>
+
+        <h2>Test Linkovi</h2>
+        <p>Testirajte ove linkove u vašoj aplikaciji:</p>
+        
+        <a href="http://localhost:3000/" class="nav-link">🏠 Početna</a>
+        <a href="http://localhost:3000/personalize" class="nav-link">🎨 Personalizuj</a>
+        <a href="http://localhost:3000/editor" class="nav-link">✏️ Editor</a>
+        <a href="http://localhost:3000/contact" class="nav-link">📞 Kontakt</a>
+
+        <h2>Izmene koje sam napravio:</h2>
+        
+        <h3>1. ShopCategoryArea komponenta</h3>
+        <pre><code>// STARO (problematično)
+const handleCategoryRoute = (model) => {
+  window.location.href = `/editor?model=${encodeURIComponent(model)}&fromCategory=true`;
+};
+
+// NOVO (ispravno)
+const handleCategoryRoute = (model) => {
+  router.push(`/editor?model=${encodeURIComponent(model)}&fromCategory=true`);
+};</code></pre>
+
+        <h3>2. ProductCarousel komponenta</h3>
+        <pre><code>// Ista izmena kao gore - zamenio window.location.href sa router.push()</code></pre>
+
+        <h3>3. JewelryBanner komponenta</h3>
+        <pre><code>// Ista izmena kao gore - zamenio window.location.href sa router.push()</code></pre>
+
+        <h3>4. Editor stranica</h3>
+        <pre><code>// STARO (problematično)
+if (fromCategory === 'true' && typeof window !== 'undefined') {
+  const newUrl = `/editor?model=${encodeURIComponent(model || '/cap/scene.gltf')}`;
+  window.location.href = newUrl;
+}
+
+// NOVO (ispravno)
+if (fromCategory === 'true' && typeof window !== 'undefined') {
+  const newUrl = `/editor?model=${encodeURIComponent(model || '/cap/scene.gltf')}`;
+  router.replace(newUrl, undefined, { shallow: true });
+}</code></pre>
+
+        <h3>5. Wrapper komponenta</h3>
+        <pre><code>// Modifikovao GlobalLoader da ne blokira navigaciju
+// Sada se loader prikazuje samo pri prvom učitavanju stranice
+// Za navigaciju između stranica nema loading screen-a</code></pre>
+
+        <h2>Kako testirati:</h2>
+        <ol>
+            <li>Pokrenite development server: <code>npm run dev</code> ili <code>yarn dev</code></li>
+            <li>Idite na http://localhost:3000</li>
+            <li>Kliknite na "Personalizuj" u meniju</li>
+            <li>Stranica treba da se učita bez problema</li>
+            <li>Testirajte i klikove na kategorije proizvoda</li>
+        </ol>
+
+        <div class="solution">
+            <h2>🎉 Rezultat</h2>
+            <p>Navigacija sada treba da radi besprekorno! Next.js router će pravilno upravljati rutiranjem bez refresh-a stranice.</p>
+        </div>
+    </div>
+</body>
+</html>
